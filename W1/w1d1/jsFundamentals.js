@@ -19,9 +19,9 @@ function stack(){
 console.log(local)//undefined
 stack()// "MERN STACK RULES"
 
-// -------------- Const vs Let vs Var --------------
-
 // -------------- Hoisting ------------
+
+// -------------- Const vs Let vs Var --------------
 
 // -------------- Destructuring --------------
 
