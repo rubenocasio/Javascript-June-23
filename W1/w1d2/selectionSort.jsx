@@ -33,9 +33,29 @@
  * @returns {Array<number>} The given array after being sorted.
  */
 const selectionSort = (nums = []) => {
-    // Code goes here
-}
-const numsRandomOrder = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
-const numsReversed = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-console.log(selectionSort(numsRandomOrder));
-console.log(selectionSort(numsReversed));
+    const len = nums.length;
+  
+    for (let i = 0; i < len - 1; i++) {
+      // Find the index of the minimum value in the remaining unsorted section.
+      let minIndex = i;
+  
+      for (let j = i + 1; j < len; j++) {
+        if (nums[j] < nums[minIndex]) {
+          minIndex = j;
+        }
+      }
+  
+      // Swap the minimum value with the current element.
+      if (minIndex !== i) {
+        [nums[i], nums[minIndex]] = [nums[minIndex], nums[i]];
+      }
+    }
+  
+    return nums;
+  };
+  
+  const numsRandomOrder = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
+  const numsReversed = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+  
+  console.log(selectionSort(numsRandomOrder)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  console.log(selectionSort(numsReversed)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
