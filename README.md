@@ -10,11 +10,11 @@ June 2023 Javascript Stack
 ## Commands
 ## Frontend Dependencies install(client)
 ```
-
+npm install react-bootstrap bootstrap
 ```
 ### App.js imports
 ```
-
+import "bootstrap/dist/css/bootstrap.min.css";
 ```
 
 ## Backend Dependencies install(server)
@@ -23,7 +23,8 @@ June 2023 Javascript Stack
 ```
 ## Onetime install(server)
 ```
-
+npm install -g nodemon (Windows)
+sudo npm install -g nodemon (Mac)
 ```
 
 ## Computer Rogue Port Kill Instructions
