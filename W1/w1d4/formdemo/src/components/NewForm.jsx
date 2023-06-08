@@ -9,23 +9,46 @@ const lightMode = {
     color: "black",
 }
 
-const Form = () => {
+const NewForm = () => {
+
     //State variables name, type, age, img
-    const [name, setName] = useState("")
-    const [type, setType] = useState("")
-    const [age, setAge] = useState("")
-    const [img, setImg] = useState("")
+    const [formData, setFormData] = useState({
+        name: '',
+        type: '',
+        age: '',
+        img: ''
+    })
 
     let [listOfPets, setListOfPets] = useState([])
 
     const [light, setLight] = useState(true)
     const lightSwitch = () => setLight(!light)
 
+    const inputHandler = (e) => {
+        const {name, value} = e.target;
+        setFormData((prevState) => ({...prevState, [name]: value}))
+    }
+
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log("Form submitted", name, type, age, img)
-        let petObj = {name, type, age, img}
-        setListOfPets([...listOfPets, petObj])
+        
+        setListOfPets((prevState) => [...prevState, formData])
+        setFormData({
+            name: '',
+            type: '',
+            age: '',
+            img: ''
+        })
+    }
+
+    const deletePet = (idx) => {
+        console.log("Deleting this pet: ", idx)
+
+        let filteredCopy = listOfPets.filter((pet, i) => {
+            console.log("Pet and index values being passed to our filter: ", pet, idx)
+            return i !== idx
+        })
+        setListOfPets(filteredCopy)
     }
 
   return (
@@ -37,19 +60,19 @@ const Form = () => {
         <form onSubmit={submitHandler}>
             <div className='form-group'>
                 <label>Pet Name: </label> 
-                <input type="text" onChange={ (e) => setName(e.target.value) } className='form-control'/>
+                <input type="text" onChange={inputHandler} name='name' className='form-control' value={formData.name}/>
             </div>
             <div className='form-group'> 
                 <label>Pet Type: </label> 
-                <input type="text" onChange={ (e) => setType(e.target.value) } className='form-control'/>
+                <input type="text" onChange={inputHandler} name='type' className='form-control' value={formData.type}/>
             </div>
             <div className='form-group'>
                 <label>Pet Age: </label>
-                <input type="number" onChange={ (e) => setAge(e.target.value) } className='form-control'/>
+                <input type="number" onChange={inputHandler} name='age' className='form-control' value={formData.age}/>
             </div>
             <div className='form-group'>
                 <label>Pet Image: </label>
-                <input type="text" onChange={ (e) => setImg(e.target.value) } className='form-control'/>
+                <input type="text" onChange={inputHandler} name='img' className='form-control' value={formData.img}/>
             </div>
             <input type="submit" value="Add Pet" className='btn btn-primary mt-3'/>
         </form>
@@ -58,12 +81,14 @@ const Form = () => {
             {
                 listOfPets.map((pet, index) => {
                     return (
-                        <div >
+                        <div key={index}>
                             <h3>{pet.name}</h3>
                             <p>This is the index value to this pet: {index}</p>
                             <h4>{pet.type}</h4>
                             <h5>{pet.age}</h5>
                             <img src={pet.img} alt="Pet Pic" height="200px"/>
+                            <br />
+                            <button onClick={() => deletePet(index)} className='btn btn-outline-dark mt-3'>Delete Pet</button>
                             <hr />
                         </div>
                     )
@@ -78,4 +103,4 @@ const Form = () => {
   )
 }
 
-export default Form
+export default NewForm
