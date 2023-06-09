@@ -15,6 +15,7 @@
     1. create a merge function to merge two already sorted arrays into a single
         sorted array.
       - you do NOT need to work in place, ok to use a new array
+
     2. create mergeSort function to sort the provided array
       - split the array in half and recursively merge the halves using the
           previously created merge function.
@@ -51,12 +52,41 @@ const expectedMerge4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  *    both given halves.
  */
 function merge(left, right) {
-    //Code goes here
+  let result = [];
+  let indexLeft = 0;
+  let indexRight = 0;
+
+  while (indexLeft < left.length && indexRight < right.length) {
+    if (left[indexLeft] < right[indexRight]) {
+      result.push(left[indexLeft]);
+      indexLeft++;
+    } else {
+      result.push(right[indexRight]);
+      indexRight++;
+    }
+  }
+
+  // in case one of the arrays has remaining items due to unequal lengths, all of those can be added
+  while (indexLeft < left.length) {
+    result.push(left[indexLeft]);
+    indexLeft++;
+  }
+
+  while (indexRight < right.length) {
+    result.push(right[indexRight]);
+    indexRight++;
+  }
+  
+  return result;
+// one liner version of adding in any left over items
+// return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
+
 }
 console.log(merge(sortedA1, sortedB1));
 console.log(merge(sortedA2, sortedB2));
 console.log(merge(sortedA3, sortedB3));
 console.log(merge(sortedA4, sortedB4));
+
 
 // mergeSort
 const numsOrdered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -74,7 +104,17 @@ const expectedSort = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  * @returns {Array<number>} A New sorted array.
  */
 function mergeSort(nums) {
-    //Code goes here
+  if (nums.length === 1) {
+    // return once we hit an array with a single item
+    return nums;
+  }
+
+  const middleIdx = Math.floor(nums.length / 2);
+  const left = nums.slice(0, middleIdx);
+  const right = nums.slice(middleIdx);
+  const sortedLeft = mergeSort(left);
+  const sortedRight = mergeSort(right);
+  return merge(sortedLeft, sortedRight);
 }
 const ex = [10,8,6,4,3,7,9,1,2,5];
 console.log(mergeSort(ex))
