@@ -11,6 +11,7 @@ June 2023 Javascript Stack
 ## Frontend Dependencies install(client)
 ```
 npm install react-bootstrap bootstrap
+npm install axios
 ```
 ### App.js imports
 ```
