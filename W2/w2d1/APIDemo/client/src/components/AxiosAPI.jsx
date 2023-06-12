@@ -19,7 +19,7 @@ const AxiosAPI = () => {
       console.log("This is an error from our catch method: ", error)
     })
     //async code
-    console.log("I am texting someone while waiting on a promis lifecycle to finalize")
+    console.log("I am texting someone while waiting on a promise lifecycle to finalize")
   }
 
   return (
