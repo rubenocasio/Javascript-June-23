@@ -50,21 +50,43 @@ const expected2 = 0;
 // Define a function called "diagonalDifference" that takes a square matrix as input
 function diagonalDifference(sqrMatrix) {
     // Initialize a variable to store the sum of left-to-right diagonal elements
+    let ltrSum = 0;
     // Initialize a variable to store the sum of right-to-left diagonal elements
+    let rtlSum = 0;
+    
     // Start a for loop to iterate through each row in the matrix
-    // Assign the current row of the matrix to a variable for easier access
-    // Add the value of the left-to-right diagonal element to the ltrSum
-    // Add the value of the right-to-left diagonal element to the rtlSum
+    for (let i = 0; i < sqrMatrix.length; i++) {
+        // Assign the current row of the matrix to a variable for easier access
+        const row = sqrMatrix[i];
+        
+        // Add the value of the left-to-right diagonal element to the ltrSum
+        ltrSum += row[i];
+        
+        // Add the value of the right-to-left diagonal element to the rtlSum
+        rtlSum += row[row.length - i - 1];
+    }
+    
     // Calculate the absolute difference between the two diagonal sums and return the result
+    return Math.abs(ltrSum - rtlSum);
 }
 console.log(diagonalDifference(squareMatrix1));
 console.log(diagonalDifference(squareMatrix2));
 
 
-//Bonus - Builtin methods solution
 
+// Define a function called "functionalDiagonalDifference" that takes a square matrix as input
 function functionalDiagonalDifference(sqrMatrix) {
-    //Code goes here
+    // Calculate the absolute difference between the two diagonal sums using a functional approach
+    return Math.abs(
+        // Subtract the first element of the first row from...
+        sqrMatrix[0][0] -
+        // The result of mapping the rows of the matrix
+        sqrMatrix.map(
+            // For each row (arr) and its index (i), calculate the difference between the diagonal elements
+            (arr, i) => (sqrMatrix[0][0] += arr[i] - arr[arr.length - 1 - i])
+        // Retrieve the last element of the resulting array (which is the sum of the right-to-left diagonal elements) and subtract it from the left-to-right sum
+        )[sqrMatrix.length - 1]
+    );
 }
 console.log(functionalDiagonalDifference(squareMatrix1));
 console.log(functionalDiagonalDifference(squareMatrix2));
