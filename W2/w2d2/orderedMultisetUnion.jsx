@@ -52,13 +52,53 @@ const expected5 = [];
  *    not the combined amount from both sets.
  */
 function orderedMultisetUnion(sortedA, sortedB) {
-    //Code goes here
+    // Create an empty array called union to store the final union
+    const union = [];
+    
+    // Initialize two pointers, idxA and idxB, for iterating through both input arrays
+    let idxA = 0;
+    let idxB = 0;
+
+    // Iterate through both input arrays until one of them reaches the end
+    while (idxA < sortedA.length || idxB < sortedB.length) {
+        // If idxA reaches the end of sortedA, push all remaining elements of sortedB into union
+        if (idxA === sortedA.length) {
+            union.push(sortedB[idxB++]);
+
+        // continue is used inside the while loop to skip the remaining part of the loop's current iteration and move directly to the next iteration.
+            continue;
+        }
+
+        // If idxB reaches the end of sortedB, push all remaining elements of sortedA into union
+        else if (idxB === sortedB.length) {
+            union.push(sortedA[idxA++]);
+            continue;
+        }
+
+        // If the current elements in both arrays are equal, add the element to union
+        // and move pointer to the next elements
+        if (sortedA[idxA] === sortedB[idxB]) {
+            union.push(sortedA[idxA++]);
+            idxB++;
+        } 
+        // If the current element in sortedA is less than the current element in sortedB,
+        // add the element from sortedA to union and move idxA to the next element
+        else if (sortedA[idxA] < sortedB[idxB]) {
+            union.push(sortedA[idxA++]);
+        } 
+        // If the current element in sortedA is greater than the current element in sortedB,
+        // add the element from sortedB to union and move idxB to the next element
+        else {
+            union.push(sortedB[idxB++]);
+        }
+    }
+    // Return the result array containing the ordered multiset union
+    return union;
 }
+
 console.log(orderedMultisetUnion(nums1A, nums1B))
 console.log(orderedMultisetUnion(nums2A, nums2B))
 
-
 /*****************************************************************************/
-
 
 module.exports = { orderedMultisetUnion };
