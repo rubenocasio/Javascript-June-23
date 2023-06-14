@@ -1,0 +1,14 @@
+{
+  "name": "expresslecture",
+  "version": "100.0.1",
+  "description": "This is our express lecture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ruben Ocasio",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
