@@ -52,6 +52,7 @@ app.get('/api/menu', (req, res) => {
 //This afternoons lecture
 //create a new menu item
 //get one menu item by index number
+//get one menu item by index number
 //update a menu item based on its index number
 //delete a menu item based on its index number
 
