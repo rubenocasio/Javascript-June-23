@@ -29,9 +29,10 @@ const menuItems = [
     { name: "🍝", price: 20.0 },
 ]
 
-//get=retrieve all or retrieve one
-//post=create something new
-//put= update something
+//get= retrieve all or retrieve one
+//post = create something new
+//put = update something
+//patch = update something
 //delete = delete something
 
 //http://localhost:8000/api
@@ -39,22 +40,53 @@ app.get('/api', (request, response) => {
     response.json({message: "Hola!!"})
 })
 
+
+
+//create a new menu item
+app.post("/api/menu/new", (req, res) => {
+    console.log(req.body)
+    menuItems.push(req.body)
+    res.json({
+        count: menuItems.length,
+        results: menuItems
+    })
+})
+
 //Get all --- Read ALL
 // app.get --> takes 2 arguments: (path, callback function (request, response))
-    // request: what is requested from UI
-    // response: what are we responding with?
+// request: what is requested from UI
+// response: what are we responding with?
 app.get('/api/menu', (req, res) => {
     res.json({
         count: menuItems.length,
         results: menuItems})
 })
 
-//This afternoons lecture
-//create a new menu item
+
 //get one menu item by index number
-//get one menu item by index number
+app.get("/api/menu/:idx", (req, res) => {
+    res.json({results: menuItems[req.params.idx]})
+})
+
 //update a menu item based on its index number
+app.put("/api/menu/:idx", (req, res) => {
+    menuItems[req.params.idx] = req.body;
+    res.json({
+        count: menuItems.length,
+        results: menuItems})
+})
+app.patch("/api/menu/:idx", (req, res) => {
+    menuItems[req.params.idx] = req.body;
+    res.json({
+        count: menuItems.length,
+        results: menuItems})
+})
+
 //delete a menu item based on its index number
+app.delete("/api/menu/:idx", (req, res) => {
+    menuItems.splice(req.params.idx, 1)
+    res.json({results: menuItems})
+})
 
 
 //line of code that actually runs our server on a specified port.
