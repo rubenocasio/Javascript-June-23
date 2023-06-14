@@ -5,10 +5,10 @@
   You may assume that each input would have exactly one solution, and you may not use the same element twice.
 */
 
-const nums1 = [2, 11, 7, 15];
 
+
+const nums1 = [2, 11, 7, 15]; // 0:2
 const targetSum1 = 9;
-
 const expected1 = [0, 2];
 // Explanation: nums[0] + nums[2] = 2 + 7 = 9. Return order doesn't matter.
 
@@ -19,6 +19,10 @@ const expected2 = [2, 4];
 const nums3 = [3, 8, 4, 1, 9, 0, -2];
 const targetSum3 = 6;
 const expected3 = [1, 6];
+
+const nums4 = [];
+const targetSum4 = 6;
+const expected4 = [];
 
 
 /*****************************************************************************/
@@ -32,12 +36,37 @@ const expected3 = [1, 6];
  * @returns {Array<number>} The two indexes of the numbers in the given nums
  *    that add up to the targetSum.
  */
+
 function twoSum(nums, targetSum) {
-  //Code goes here
+
+  const numsToIndex = {}
+  
+//for (initial-expression; condition; second-expression)
+  for(let i = 0; i < nums.length; i++){
+
+    const numA = nums[i]
+    // console.log("This is numA: ", numA)
+
+                // 9 - 2 = 7
+    const numB = targetSum - numA;
+    // console.log("This is numB: ", numB)
+
+    if(numsToIndex.hasOwnProperty(numB)){
+
+      const idxB = numsToIndex[numB]
+      // console.log("This is our if statement in our first for loop: ", idxB)
+
+      return [idxB, i]
+    }
+    
+    numsToIndex[numA] = i
+  }
+  return []
 }
-console.log(twoSum(nums1, targetSum1));
-console.log(twoSum(nums2, targetSum2));
-console.log(twoSum(nums3, targetSum3));
+// console.log(twoSum(nums1, targetSum1));
+// console.log(twoSum(nums2, targetSum2));
+// console.log(twoSum(nums3, targetSum3));
+console.log(twoSum(nums4, targetSum4));
 
 
 module.exports = { twoSum };
