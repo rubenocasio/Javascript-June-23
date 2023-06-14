@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Landing from './pages/Landing';
 import About from './pages/About';
 import Navbar from './components/Navbar';
@@ -8,6 +8,8 @@ import FavFood from './pages/FavFood';
 function App() {
   return (
     <div className="App">
+      <BrowserRouter>
+      
       <h1>My Routing Application</h1>
       <Navbar />
       <Routes>
@@ -16,6 +18,8 @@ function App() {
         <Route path="/favFood/" element={<FavFood />} />
         <Route path="/favFood/:food" element={<FavFood />} />
       </Routes>
+      
+        </BrowserRouter>
     </div>
   );
 }
