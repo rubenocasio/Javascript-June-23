@@ -4,10 +4,10 @@ const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
     },
-    lastname: {
+    lastName: {
         type: String,
     }
-})
+}, {timestamps: true})
 
 const Users = mongoose.model("Users", UserSchema)
 
