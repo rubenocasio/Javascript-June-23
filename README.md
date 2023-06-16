@@ -12,6 +12,7 @@ June 2023 Javascript Stack
 ```
 npm install react-bootstrap bootstrap
 npm install axios
+npm install react-router-dom
 ```
 ### App.js imports
 ```
@@ -21,6 +22,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 ## Backend Dependencies install(server)
 ```
 npm i express
+npm i mongoose
+npm i cors
+npm i dotenv
 ```
 ## Onetime install(server)
 ```
