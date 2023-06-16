@@ -5,8 +5,7 @@
   integers that adds up to the sum passed in as one of the inputs.
 */
 
-const nums1 = [2, 5, 3, 6, 7, 23, 12];
-const sum1 = 16;
+
 const expected1 = [
   [2, 5, 3, 6],
   [3, 6, 7],
@@ -52,8 +51,30 @@ const expected5 = [
  *    this context means the numbers whose indexes are one after the other
  *    only.
  */
+const nums1 = [2, 5, 3, 6, 7, 23, 12];
+const sum1 = 16;
+
 function findConsqSums(nums, targetSum) {
-  //Code Block
+  //initialize an empty Array called sumSets to store the resulting sets of consecutive numbers
+  const sumSets = []
+
+  //Iterate over the input array using a for loop
+  for(let i = 0; i < nums.length; i++) {
+    // console.log(`This is the start of our for loop: ${i} : ${nums[i]} `)
+
+    let sum = nums[i]
+
+    for(let c = i + 1; c <= nums.length; c++){
+      // console.log(`This is the start of our nested for loop: ${c} : ${nums[i]} `)
+      if(sum === targetSum){
+        sumSets.push(nums.slice(i, c))
+      }
+      sum += nums[c]
+      // console.log(`This is the start of our if statement: ${sum} : ${nums[c]} `)
+    }
+  }
+
+  return sumSets
 }
 console.log(findConsqSums(nums1, sum1))
 console.log(findConsqSums(nums2, sum2))
