@@ -21,6 +21,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 ## Backend Dependencies install(server)
 ```
 npm i express
+npm i mongoose
+npm i cors
+npm i dotenv
 ```
 ## Onetime install(server)
 ```
