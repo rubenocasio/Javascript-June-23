@@ -1,26 +1,28 @@
 /* 
   Given an id, an object that has keys with corresponding updated values, and an array of objects
+
   Find the object by "id" key that matches the given id value and then update that object's
   keys with the provided new values.
+
   Return the updated object, or null if no object was found
 */
 
 const students = [
-  {
+  { //Index 0
     id: 1,
     name: "student1",
     isLateToday: false,
     lateCount: 15,
     redBeltStatus: false,
   },
-  {
+  {//Index 1
     id: 2,
     name: "student2",
     isLateToday: false,
     lateCount: 1,
     redBeltStatus: false,
   },
-  {
+  {//Index 2
     id: 3,
     name: "student3",
     isLateToday: false,
@@ -76,7 +78,30 @@ const expected3 = null;
  */
 
 function findByIdAndUpdate(id, updatedVals, collection) {
+  //Code block
+  //In our for loop iterate the collection array
+  for(let i = 0; i < collection.length; i++ ){
+    
+    // console.log(`This is the start of our for loop: ${i} : ${collection[i].name}`)
 
+    //Checking IF the current objects ID matches the given ID
+    if(collection[i].id === id){
+
+      //If the object with the given ID is found: In our for loop here we're iterating
+      // through the keys in the updatedVals object
+      for(const key in updatedVals){
+        //Boolean (hasOwnProperty): Check if the key exists in the found object
+        if(collection[i].hasOwnProperty(key)){
+          //update the value of the key in the found object with the value from updatedVals
+          collection[i][key] = updatedVals[key]
+        }
+      }
+      //Return the updated object
+      return collection[i]
+    }
+  }
+  //If the object with the given id is not found, return null
+  return null
 }
 console.log(findByIdAndUpdate(id1, updateData1, students))
 console.log(findByIdAndUpdate(id2, updateData2, students))
