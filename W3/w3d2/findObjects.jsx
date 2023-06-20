@@ -1,7 +1,8 @@
 /* 
   Given a search criteria object, whose values will only be
   primitives (ints, strings, booleans) and a list of objects.
-  return any object that matches all the key value pairs in the search
+
+  Return any object that matches all the key value pairs in the search
   criteria object.
   
   Bonus: write a 2nd solution using built in methods to practice functional
@@ -47,18 +48,32 @@ const expected2 = [
  */
 function findObjects(criteria, collection) {
   //Code block
+  let result = []
+
+  for(let obj of collection) {
+    // console.log(obj)
+    let isMatch = true
+
+    for(let key in criteria){
+      // console.log(key)
+      if(obj[key] !== criteria[key]){
+        isMatch = false
+        break
+      }
+    }
+    if(isMatch){
+      result.push(obj)
+    }
+  }
+  return result
 }
 
-console.log(findObjects(searchCriteria1, items));
-console.log(findObjects(searchCriteria2, items));
+// console.log(findObjects(searchCriteria1, items));
+// console.log(findObjects(searchCriteria2, items));
 console.log('-----------------------------------')
 
-// const functionalFindObjects = (criteria, collection) => collection.filter((item) => Object.keys(criteria).every((key) => item[key] === criteria[key]))
+const functionalFindObjects = (criteria, collection) => collection.filter((item) => Object.keys(criteria).every((key) => item[key] === criteria[key]))
+console.log(functionalFindObjects(searchCriteria1, items));
+console.log(functionalFindObjects(searchCriteria2, items));
 
-function findObjectsFunctional(criteria, collection) {
-  //Code block
-}
-console.log(findObjectsFunctional(searchCriteria1, items));
-console.log(findObjectsFunctional(searchCriteria2, items));
-
-module.exports = { findObjects, findObjectsFunctional };
+module.exports = { findObjects };
