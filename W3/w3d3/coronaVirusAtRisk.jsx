@@ -90,15 +90,36 @@ const expected = ["Person One", "Person Three"];
  */
 function coronaVirusAtRisk(persons) {
   //Code goes here
+  //Step 1 - Empty array
+  let atRisk = []
+
+  //Step 2 - for loop
+  for(let person of persons){
+    // console.log('Person: ' + person.firstName + ' ' + person.lastName)
+    if(!person.isSocialDistancing){
+
+      //iterate through each friend of the person
+      for(let friend of person.friends  ){
+        // console.log(friend)
+        //Checking if the friend is not social distancing && has covid
+        if(!friend.isSocialDistancing && friend.hasCovid){
+          //.push into array
+          atRisk.push(`${person.firstName} ${person.lastName}`)
+          break;
+        }
+      }
+    }
+  }
+  return atRisk
 }
-console.log(coronaVirusAtRisk(people));
+// console.log(coronaVirusAtRisk(people));
 
 /**
  * - Time O(?).
  * - Space O(?).
  */
-function functionalCoronaVirusAtRisk(persons) {
-  //Code goes here
+const functionalCoronaVirusAtRisk = (persons) => {
+  return persons.filter((person) => !person.isSocialDistancing && person.friends.some(friend => !friend.isSocialDistancing && friend.hasCovid)).map(person => `${person.firstName} ${person.lastName}`)
 }
 console.log(functionalCoronaVirusAtRisk(people));
 
