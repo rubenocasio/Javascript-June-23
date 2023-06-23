@@ -57,7 +57,34 @@ it can be a palindrome if you are left with 0 or 1 char remaining:
 
 // Function to determine if a string can become a palindrome
 function canStringBecomePalindrome(str) {
-  //Code block
+  if(str.length <= 1){
+    return str.length === 1
+  }
+  //Initialize an object to keep count of each character in the string
+  const charCounts = {}
+  //Iterate over the string with a for loop to count frequency of each character
+  for(let i = 0; i < str.length; i++){
+    // console.log(str)
+    const char = str[i]
+    // console.log(char)
+    if(!charCounts[char]){
+      charCounts[char] = 1
+    }
+    else {
+      charCounts[char]++
+    }
+  }
+  let oddCount = false;
+  for(const char in charCounts){
+    //If the count of this character is odd lets do something
+    if(charCounts[char] % 2 !== 0){
+      if(oddCount){
+        return false
+      }
+      oddCount = true
+    }
+  }
+  return true
 }
 console.log(canStringBecomePalindrome(str1));
 console.log(canStringBecomePalindrome(str2));
@@ -66,4 +93,4 @@ console.log(canStringBecomePalindrome(str4));
 console.log(canStringBecomePalindrome(str5));
 console.log(canStringBecomePalindrome(str6));
 
-module.exports = { canStringBecomePalindrome, canBecomePalindrome };
+module.exports = { canStringBecomePalindrome };
