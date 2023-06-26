@@ -16,6 +16,7 @@ function rehash(s) {
     //Code block
 }
 
+console.log(rehash(str1));  // Output: "a199b70c42j3"
 /*****************************************************************************/
 
 module.exports = { rehash };
