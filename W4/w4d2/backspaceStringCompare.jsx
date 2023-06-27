@@ -38,7 +38,25 @@ const expected4 = false;
  *    have been processed.
  */
 function backspaceStringCompare(S, T) {
-  //Code goes here
+
+  function processBackSpaces(str){
+    const stack = []
+
+    for(let i = 0; i < str.length; i++){
+      if(str[i] !== '#'){
+        const myPush = str[i]
+        // console.log(myPush)
+        stack.push(str[i])
+      } else if (stack.length !== 0){
+        // console.log(stack)
+        stack.pop()
+      }
+    }
+    return stack.join('')
+    // console.log(stack)
+  }
+
+  return processBackSpaces(S) === processBackSpaces(T)
 }
 console.log(backspaceStringCompare(S1,T1))
 console.log(backspaceStringCompare(S2,T2))
