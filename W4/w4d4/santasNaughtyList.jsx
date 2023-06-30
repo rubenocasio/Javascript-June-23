@@ -51,9 +51,32 @@ const expected3 = [];
  * @returns {Array<Person>} The people that have the given bad habit.
  */
 function santasNaughtyList(persons, badHabit) {
-    //Code block
+    //Step 1
+    const coalRecipients = [];
+    //Step 2
+    for(let i = 0; i < persons.length; i++){
+        const person = persons[i]
+        // console.log('This is person: ' + person.firstName + ' ' + person.lastName)
+        // console.log('This is person: ' + person)
+        //Loop through each habit of the current person
+        for(let h = 0; h < person.habits.length; h++){
+            const personsHabit = person.habits[h]
+            // console.log("Inside our nested for loop: " + personsHabit)
+            //Check if the current habit matches the badhabit
+            if(personsHabit === badHabit){
+                //If it matches, let's add the persons full name to the empty array (coalRecipients)
+                coalRecipients.push(`${person.firstName} ${person.lastName}`)
+                //break out of the inner loop since we found a match
+                break;
+            }
+        }
+    }
+    return coalRecipients;
 }
-console.log(santasNaughtyList(students, badHabit1))
+// console.log(santasNaughtyList(students, badHabit1))
+// console.log(santasNaughtyList(students, badHabit2))
+// console.log(santasNaughtyList(students, badHabit3))
+
 /**
  * Finds a list of people whose habits contain the given bad habit. 
  * - Time O(?).
@@ -66,11 +89,13 @@ console.log(santasNaughtyList(students, badHabit1))
  * @param {string} badHabit
  * @returns {Array<Person>} The people that have the given bad habit.
  */
-function santasNaughtyListFunctional(persons, badHabit) {
-    //Code block
-}
+const santasNaughtyListFunctional = (persons, badHabit) => persons.filter((p) => p.habits.includes(badHabit)).map((p) => `${p.firstName} ${p.lastName}` )
+
 console.log(santasNaughtyListFunctional(students, badHabit1))
+console.log(santasNaughtyListFunctional(students, badHabit2))
+console.log(santasNaughtyListFunctional(students, badHabit3))
+
 /*****************************************************************************/
 
 
-module.exports = {santasNaughtyList,functionalSantasNaughtyList};
+module.exports = {santasNaughtyList, santasNaughtyListFunctional};
