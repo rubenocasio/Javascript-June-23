@@ -47,9 +47,38 @@ const expected3 = [-1, -1]; // not found.
  * @returns {Array<number, number>} The song pair indexes, or [-1, -1] if no
  *    pair is found.
  */
-function musicRuntime(busDuration, songDurations) {}
+function musicRuntime(busDuration, songDurations) {
+  let targetDuration = busDuration - 30
+  // console.log("This is my targetDuration: " + targetDuration)
+
+  let maxDuration = -1
+  let pairIndexes = [-1, -1]
+
+  for(let i = 0; i < songDurations.length; i++){
+
+    for(let j = i + 1; j < songDurations.length; j++){
+
+      //Calculate the duration sum of the current pair
+      let durationSum = songDurations[i] + songDurations[j]
+      // console.log("This is my durationSum: " + durationSum)
+      
+      //Check if the durationSum matches the targetSum
+      if(durationSum === targetDuration){
+
+        if(Math.max(songDurations[i], songDurations[j]) > maxDuration){
+          maxDuration = Math.max(songDurations[i], songDurations[j])
+          pairIndexes = [i, j]
+        }
+      }
+    }
+  }
+  return pairIndexes
+}
+console.log(musicRuntime(busDuration1, songDurations1)) //[4, 6] = 230, 40
+console.log(musicRuntime(busDuration2, songDurations2)) //[3, 6]
+console.log(musicRuntime(busDuration3, songDurations3)) //[-1, -1]
 
 /*****************************************************************************/
 
 
-module.exports = {musicRuntime,musicRuntime2};
+module.exports = {musicRuntime};
